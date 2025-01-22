@@ -3,7 +3,7 @@ import torch
 import argparse
 from ProcessData import create_arrays
 from torch.utils.data import DataLoader, TensorDataset
-from RegressionModel import makeModel, trainModel
+from ExampleModel import makeModel, trainModel
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='Train a regression model for the Tagger.')
