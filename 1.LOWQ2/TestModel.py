@@ -54,6 +54,6 @@ print(f"Scattering angle < 2 mrad score: {rme_momentum_theta}")
 
 rme_sum = rme_momentum + rme_momentum_z + rme_momentum_theta
 if rme_sum > 1: score = 0
-else: score = 1 - np.exp(rme_sum)/np.e
+else: score = 1.0 - (np.exp(rme_sum) - 1.0) / (np.exp(1.0) - 1.0)
 
 print(f"Score: {score}")
