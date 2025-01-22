@@ -16,14 +16,15 @@ rule taggertracker_training_tensors:
 
 rule split_tensors_features:
      output:
-        "{outputdir}/features.eicrecon.tree.edm4eic.root",
+        "features_lowq2.edm4eic.root",
      input:
-        "{outputdir}/test_tensors.eicrecon.tree.edm4eic.root",
+        "test_tensors.eicrecon.tree.edm4eic.root",
      params:
         compact_xml="epic_lowq2.xml",     
      shell:
         """
         eicrecon {input} -Ppodio:output_file={output} \
+        -Pjana:nevents=100000 \
         -Ppodio:output_collections=TaggerTrackerFeatureTensor,TaggerTrackerTargetTensor \
         -Pplugins_to_ignore=janatop,LUMISPECCAL,ECTOF,BTOF,FOFFMTRK,RPOTS,B0TRK,MPGD,ECTRK,DRICH,DIRC,pid,tracking,acts,EEMC,BEMC,FEMC,EHCAL,BHCAL,FHCAL,B0ECAL,ZDC,BTRK,BVTX,PFRICH,richgeo,evaluator,pid_lut,reco,rootfile \
         -Pdd4hep:xml_files={params.compact_xml} \
@@ -31,14 +32,15 @@ rule split_tensors_features:
 	
 rule split_tensors_targets:
      output:
-        "{outputdir}/targets.eicrecon.tree.edm4eic.root",
+        "targets_lowq2.edm4eic.root",
      input:
-        "{outputdir}/test_tensors.eicrecon.tree.edm4eic.root",
+        "test_tensors.eicrecon.tree.edm4eic.root",
      params:
         compact_xml="epic_lowq2.xml",
      shell:
         """
         eicrecon {input} -Ppodio:output_file={output} \
+        -Pjana:nevents=100000 \
         -Ppodio:output_collections=TaggerTrackerTargetTensor \
         -Pplugins_to_ignore=janatop,LUMISPECCAL,ECTOF,BTOF,FOFFMTRK,RPOTS,B0TRK,MPGD,ECTRK,DRICH,DIRC,pid,tracking,acts,EEMC,BEMC,FEMC,EHCAL,BHCAL,FHCAL,B0ECAL,ZDC,BTRK,BVTX,PFRICH,richgeo,evaluator,pid_lut,reco,rootfile \
         -Pdd4hep:xml_files={params.compact_xml} \
@@ -46,14 +48,15 @@ rule split_tensors_targets:
 	
 rule split_tensors_result:
      output:
-        "{outputdir}/submit.eicrecon.tree.edm4eic.root",
+        "submit_lowq2.edm4eic.root",
      input:
-        "{outputdir}/test_tensors.eicrecon.tree.edm4eic.root",
+        "test_tensors.eicrecon.tree.edm4eic.root",
      params:
         compact_xml="epic_lowq2.xml",
      shell:
         """
         eicrecon {input} -Ppodio:output_file={output} \
+        -Pjana:nevents=100000 \
         -Ppodio:output_collections=TaggerTrackerPredictionTensor \
         -Pplugins_to_ignore=janatop,LUMISPECCAL,ECTOF,BTOF,FOFFMTRK,RPOTS,B0TRK,MPGD,ECTRK,DRICH,DIRC,pid,tracking,acts,EEMC,BEMC,FEMC,EHCAL,BHCAL,FHCAL,B0ECAL,ZDC,BTRK,BVTX,PFRICH,richgeo,evaluator,pid_lut,reco,rootfile \
         -Pdd4hep:xml_files={params.compact_xml} \

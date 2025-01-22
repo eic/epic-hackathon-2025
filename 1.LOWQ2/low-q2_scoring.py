@@ -40,4 +40,9 @@ rme_momentum_theta = rme(reference_momentum_theta, submitted_momentum_theta)
 print(f"Full data score: {rme_momentum}")
 print(f"Energy < 70% beam energy score: {rme_momentum_z}")
 print(f"Scattering angle < 2 mrad score: {rme_momentum_theta}")
-print(f"Score sum: {rme_momentum + rme_momentum_z + rme_momentum_theta}")
+
+rme_sum = rme_momentum + rme_momentum_z + rme_momentum_theta
+if rme_sum > 1: score = 0
+else: score = 1 - np.exp(rme_sum)/np.e
+
+print(f"Score: {score}")

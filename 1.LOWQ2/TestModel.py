@@ -7,11 +7,9 @@ from ProcessData import create_arrays
 parser = argparse.ArgumentParser(description='Train a regression model for the Tagger.')
 parser.add_argument('--modelFile', type=str, default="TaggerTrackerTransportation.onnx", help='Path to the ONNX model file')
 parser.add_argument('--dataFiles', type=str, nargs='+', help='Path to the data files')
-parser.add_argument('--outDir', type=str, default=".", help='Output directory')
 args = parser.parse_args()
 modelFile     = args.modelFile
 dataFiles     = args.dataFiles
-outDir        = args.outDir
 
 feature_data, target_data = create_arrays(dataFiles)
 target_data = np.array(target_data)
@@ -53,4 +51,9 @@ rme_momentum_theta = rme(target_data_theta, output_theta)
 print(f"Full data score: {rme_momentum}")
 print(f"Energy < 70% beam energy score: {rme_momentum_z}")
 print(f"Scattering angle < 2 mrad score: {rme_momentum_theta}")
-print(f"Score sum: {rme_momentum + rme_momentum_z + rme_momentum_theta}")
+
+rme_sum = rme_momentum + rme_momentum_z + rme_momentum_theta
+if rme_sum > 1: score = 0
+else: score = 1 - np.exp(rme_sum)/np.e
+
+print(f"Score: {score}")
