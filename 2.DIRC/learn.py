@@ -114,6 +114,7 @@ def train(dataloader, model, loss_fn, optimizer):
         # Backpropagation
         loss.backward()
         optimizer.step()
+        optimizer.zero_grad()
 
     return np.mean(losses), np.mean(accs)
 
