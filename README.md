@@ -16,8 +16,8 @@ In order to carry out supervised training you will need files with Feature and T
 </div>
 
 TaggerTrackerFeatureTensor:
-1. y position on plane
-2. z position on plane
+1. y position on plane [mm]
+2. z position on plane [mm]
 3. x component of unit vector
 4. y component of unit vector
 
