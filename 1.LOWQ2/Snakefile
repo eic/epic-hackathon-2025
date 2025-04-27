@@ -4,7 +4,7 @@ rule taggertracker_training_tensors:
     output:
         "{outputdir}/tensors_{run_number}.eicrecon.tree.edm4eic.root",
     params:
-        input=lambda wildcards: expand("root://dtn-eic.jlab.org//work/eic2/EPIC/RECO/24.12.0/epic_craterlake/SIDIS/pythia6-eic/1.0.0/10x100/q2_0to1/pythia_ep_noradcor_10x100_q2_0.000000001_1.0_run{run_number}.ab.{number:04d}.eicrecon.tree.edm4eic.root", run_number=wildcards.run_number, number=range(0, 100) ),
+        input=lambda wildcards: expand("root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/24.12.0/epic_craterlake/SIDIS/pythia6-eic/1.0.0/10x100/q2_0to1/pythia_ep_noradcor_10x100_q2_0.000000001_1.0_run{run_number}.ab.{number:04d}.eicrecon.tree.edm4eic.root", run_number=wildcards.run_number, number=range(0, 100) ),
         compact_xml="epic_lowq2.xml",
     shell:  
         """
