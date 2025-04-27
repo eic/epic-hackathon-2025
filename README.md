@@ -31,13 +31,13 @@ TaggerTrackerTargetTensor
 Files containing these two collections to carry out supervised learning can be downloaded (or streamed) from the JLab xrootd servers. These can be opened in root using:
 
 ```
- root "root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root"
+ root "root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root"
 ```
 
 These can be copied locally using:
 
 ```
-xrdcp "root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root" ./
+xrdcp "root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root" ./
 ```
 
 Or the path can directly be passed to a training script.
@@ -56,7 +56,7 @@ And can be run using e.g.
 
 ```
 python ExampleRegression.py \
-        --dataFiles "root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root" \
+        --dataFiles "root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/training/tensors_3.eicrecon.tree.edm4eic.root" \
         --outModelFile "test.onnx"
 ```
 
@@ -70,7 +70,7 @@ The EICrecon main branch available in eic-shell is already able to output a file
 A relatively minimal version of EICrecon can be run with this:
 
 ```
-eicrecon "root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/testing/features_lowq2.edm4eic.root" \
+eicrecon "root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/1.LOWQ2/testing/features_lowq2.edm4eic.root" \
         -Ppodio:output_file=submit_lowq2.edm4eic.root \
         -Ppodio:output_collections=TaggerTrackerPredictionTensor \
         -PLOWQ2:TaggerTrackerTransportationInference:modelPath=xxx.onnx \
@@ -172,7 +172,7 @@ Before doing any of the following steps, you need to enter into the shell:
 
 This will show the input files that are prepared for you:
 ```
-xrdfs root://dtn-eic.jlab.org/ ls /work/eic2/EPIC/xrdtest/Hackathon-2025/2.DIRC/
+xrdfs root://dtn-eic.jlab.org/ ls /volatile/eic/EPIC/xrdtest/Hackathon-2025/2.DIRC/
 ```
 
 There are three types of files per dataset:
@@ -205,7 +205,7 @@ The `run_eicrecon.sh` script is provided. It is a simple wrapper designed to mak
 Let's do the preprocessing:
 
 ```
-./run_eicrecon.sh root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV.eicrecon.edm4eic.root -PDIRC:DIRCBarrelParticleIDPostML:LogLevel=off -PDIRC:DIRCBarrelParticleIDInference:LogLevel=off
+./run_eicrecon.sh root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV.eicrecon.edm4eic.root -PDIRC:DIRCBarrelParticleIDPostML:LogLevel=off -PDIRC:DIRCBarrelParticleIDInference:LogLevel=off
 ```
 This will produce `dirc_1GeV_1GeV.hackathon.edm4eic.root` (note difference `.eicrecon.` vs `.hackathon.`, latter contains tensor outputs).
 
@@ -218,7 +218,7 @@ Our goal is to be able to run inference within EICrecon. For that we will need t
 
 We will need to also preprocess eval file:
 ```bash
-./run_eicrecon.sh root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV_eval.eicrecon.edm4eic.root -PDIRC:DIRCBarrelParticleIDPostML:LogLevel=off -PDIRC:DIRCBarrelParticleIDInference:LogLevel=off
+./run_eicrecon.sh root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV_eval.eicrecon.edm4eic.root -PDIRC:DIRCBarrelParticleIDPostML:LogLevel=off -PDIRC:DIRCBarrelParticleIDInference:LogLevel=off
 ```
 
 ### Training
@@ -246,7 +246,7 @@ It will create `calibrations/onnx/DIRCBarrel.onnx`, which is exactly the file th
 
 Now that the `calibrations/onnx/DIRCBarrel.onnx` is present we can run the full set of algorithms: `DIRCBarrelParticleIDPreML`, `DIRCBarrelParticleIDInference` and `DIRCBarrelParticleIDPostML`.
 ```
-./run_eicrecon.sh root://dtn-eic.jlab.org//work/eic2/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV_submit.eicrecon.edm4eic.root
+./run_eicrecon.sh root://dtn-eic.jlab.org//volatile/eic/EPIC/xrdtest/Hackathon-2025/2.DIRC/dirc_1GeV_1GeV_submit.eicrecon.edm4eic.root
 ```
 
 The resulting `dirc_1GeV_6GeV_submit.hackathon.edm4eic.root` is to be uploaded to be scored on the leaderboard. Good luck!
