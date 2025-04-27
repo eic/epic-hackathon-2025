@@ -160,7 +160,7 @@ cd epic-hackathon-2025/2.DIRC/
 You are expected to work in eic-shell environment. We are looking to use specifically version 24.12.0 of the container. It can be installed using:
 
 ```
-curl -L https://github.com/eic/eic-shell/raw/main/install.sh | bash -s -- -v 24.12.0
+curl -L https://github.com/eic/eic-shell/raw/main/install.sh | bash -s -- -v 24.12.0-stable
 ```
 
 Before doing any of the following steps, you need to enter into the shell:
